@@ -90,6 +90,9 @@ export default function Index() {
         {step === 'format' && (
           <>
             <TeamDisplay teams={teams} />
+            <Button onClick={handleReshuffle} variant="outline" className="w-full border-dashed border-border text-muted-foreground hover:text-foreground hover:border-primary">
+              <Shuffle className="w-4 h-4 mr-2" /> Shuffle Again
+            </Button>
             <FormatSelector onSelect={handleFormat} />
           </>
         )}
