@@ -1,4 +1,4 @@
-export type TournamentFormat = 'round-robin' | 'single-elimination' | 'double-elimination' | 'league';
+export type TournamentFormat = 'round-robin' | 'double-round-robin' | 'single-elimination' | 'double-elimination' | 'league';
 
 export interface Team {
   name: string;
