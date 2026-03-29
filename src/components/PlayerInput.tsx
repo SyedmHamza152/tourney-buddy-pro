@@ -71,7 +71,7 @@ export default function PlayerInput({ onSubmit }: Props) {
       </div>
 
       <Button
-        onClick={() => onSubmit(validPlayers, numTeams)}
+        onClick={() => onSubmit(validPlayers, teamsNum)}
         disabled={!canSubmit}
         className="w-full gradient-primary text-primary-foreground font-display text-lg tracking-wider hover:opacity-90 disabled:opacity-40 h-12"
       >
