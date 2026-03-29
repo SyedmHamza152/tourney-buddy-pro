@@ -16,9 +16,18 @@ export default function Index() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [format, setFormat] = useState<TournamentFormat>('round-robin');
 
+  const [savedPlayers, setSavedPlayers] = useState<string[]>([]);
+  const [savedNumTeams, setSavedNumTeams] = useState<number>(0);
+
   const handlePlayers = (players: string[], numTeams: number) => {
+    setSavedPlayers(players);
+    setSavedNumTeams(numTeams);
     setTeams(assignTeams(players, numTeams));
     setStep('format');
+  };
+
+  const handleReshuffle = () => {
+    setTeams(assignTeams(savedPlayers, savedNumTeams));
   };
 
   const handleFormat = (f: TournamentFormat) => {
