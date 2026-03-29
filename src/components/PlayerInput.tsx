@@ -20,7 +20,8 @@ export default function PlayerInput({ onSubmit }: Props) {
   };
 
   const validPlayers = players.filter(p => p.trim());
-  const canSubmit = validPlayers.length >= numTeams * 2 && numTeams >= 2;
+  const teamsNum = typeof numTeams === 'number' ? numTeams : 0;
+  const canSubmit = validPlayers.length >= teamsNum * 2 && teamsNum >= 2;
 
   return (
     <div className="gradient-card rounded-xl border border-border p-6 shadow-card space-y-6">
