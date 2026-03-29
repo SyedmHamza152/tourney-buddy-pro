@@ -1,4 +1,4 @@
-export type TournamentFormat = 'round-robin' | 'single-elimination' | 'double-elimination' | 'league';
+export type TournamentFormat = 'round-robin' | 'double-round-robin' | 'single-elimination' | 'double-elimination' | 'league';
 
 export interface Team {
   name: string;
@@ -133,9 +133,17 @@ export function generateLeague(teams: Team[]): Match[] {
   return [...rr, ...reverse];
 }
 
+export function generateDoubleRoundRobin(teams: Team[]): Match[] {
+  const rr = generateRoundRobin(teams);
+  const maxRound = Math.max(...rr.map(m => m.round));
+  const reverse = rr.map(m => makeMatch(m.round + maxRound, m.team2, m.team1));
+  return [...rr, ...reverse];
+}
+
 export function generateFixtures(teams: Team[], format: TournamentFormat): Match[] {
   switch (format) {
     case 'round-robin': return generateRoundRobin(teams);
+    case 'double-round-robin': return generateDoubleRoundRobin(teams);
     case 'single-elimination': return generateSingleElimination(teams);
     case 'double-elimination': return generateDoubleElimination(teams);
     case 'league': return generateLeague(teams);

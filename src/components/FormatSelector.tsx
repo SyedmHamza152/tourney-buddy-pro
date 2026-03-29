@@ -6,7 +6,8 @@ interface Props {
 }
 
 const formats: { format: TournamentFormat; label: string; desc: string; icon: React.ElementType }[] = [
-  { format: 'round-robin', label: 'Round Robin', desc: 'Every team plays every other team', icon: Repeat },
+  { format: 'round-robin', label: 'Round Robin', desc: 'Every team plays every other team once', icon: Repeat },
+  { format: 'double-round-robin', label: 'Double Round Robin', desc: 'Every team plays every other team twice (home & away)', icon: Repeat },
   { format: 'single-elimination', label: 'Single Elimination', desc: 'Lose once and you\'re out', icon: GitBranch },
   { format: 'double-elimination', label: 'Double Elimination', desc: 'Two losses to be eliminated', icon: Trophy },
   { format: 'league', label: 'League', desc: 'Home & away with points table', icon: Table },
