@@ -5,7 +5,7 @@ import TeamDisplay from '@/components/TeamDisplay';
 import MatchSchedule from '@/components/MatchSchedule';
 import StandingsTable from '@/components/StandingsTable';
 import { Team, Match, TournamentFormat, assignTeams, generateFixtures, updateStandings } from '@/lib/tournament';
-import { Trophy, RotateCcw } from 'lucide-react';
+import { Trophy, RotateCcw, Shuffle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type Step = 'players' | 'format' | 'tournament';
