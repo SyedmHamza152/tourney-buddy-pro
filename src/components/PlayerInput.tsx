@@ -9,7 +9,7 @@ interface Props {
 
 export default function PlayerInput({ onSubmit }: Props) {
   const [players, setPlayers] = useState<string[]>(['']);
-  const [numTeams, setNumTeams] = useState(2);
+  const [numTeams, setNumTeams] = useState<number | ''>('');
 
   const addPlayer = () => setPlayers([...players, '']);
   const removePlayer = (i: number) => setPlayers(players.filter((_, idx) => idx !== i));
