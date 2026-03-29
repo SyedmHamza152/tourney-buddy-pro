@@ -62,7 +62,10 @@ export default function PlayerInput({ onSubmit }: Props) {
           min={2}
           max={Math.floor(validPlayers.length / 2) || 2}
           value={numTeams}
-          onChange={e => setNumTeams(parseInt(e.target.value) || 2)}
+          onChange={e => {
+            const val = e.target.value;
+            setNumTeams(val === '' ? '' : (parseInt(val) || ''));
+          }}
           className="bg-muted border-border text-foreground w-24"
         />
       </div>
