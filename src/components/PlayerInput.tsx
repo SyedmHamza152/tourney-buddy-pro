@@ -78,7 +78,7 @@ export default function PlayerInput({ onSubmit }: Props) {
         <Shuffle className="w-5 h-5 mr-2" /> Generate Teams
       </Button>
       {!canSubmit && validPlayers.length > 0 && (
-        <p className="text-xs text-muted-foreground text-center">Need at least {numTeams * 2} players for {numTeams} teams</p>
+        <p className="text-xs text-muted-foreground text-center">Need at least {teamsNum * 2} players for {teamsNum} teams</p>
       )}
     </div>
   );
