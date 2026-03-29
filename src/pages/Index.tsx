@@ -5,7 +5,7 @@ import TeamDisplay from '@/components/TeamDisplay';
 import MatchSchedule from '@/components/MatchSchedule';
 import StandingsTable from '@/components/StandingsTable';
 import { Team, Match, TournamentFormat, assignTeams, generateFixtures, updateStandings } from '@/lib/tournament';
-import { Trophy, RotateCcw } from 'lucide-react';
+import { Trophy, RotateCcw, Shuffle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 type Step = 'players' | 'format' | 'tournament';
@@ -16,9 +16,18 @@ export default function Index() {
   const [matches, setMatches] = useState<Match[]>([]);
   const [format, setFormat] = useState<TournamentFormat>('round-robin');
 
+  const [savedPlayers, setSavedPlayers] = useState<string[]>([]);
+  const [savedNumTeams, setSavedNumTeams] = useState<number>(0);
+
   const handlePlayers = (players: string[], numTeams: number) => {
+    setSavedPlayers(players);
+    setSavedNumTeams(numTeams);
     setTeams(assignTeams(players, numTeams));
     setStep('format');
+  };
+
+  const handleReshuffle = () => {
+    setTeams(assignTeams(savedPlayers, savedNumTeams));
   };
 
   const handleFormat = (f: TournamentFormat) => {
@@ -81,6 +90,9 @@ export default function Index() {
         {step === 'format' && (
           <>
             <TeamDisplay teams={teams} />
+            <Button onClick={handleReshuffle} variant="outline" className="w-full border-dashed border-border text-muted-foreground hover:text-foreground hover:border-primary">
+              <Shuffle className="w-4 h-4 mr-2" /> Shuffle Again
+            </Button>
             <FormatSelector onSelect={handleFormat} />
           </>
         )}
