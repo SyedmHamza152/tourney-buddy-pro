@@ -9,7 +9,7 @@ interface Props {
 
 export default function PlayerInput({ onSubmit }: Props) {
   const [players, setPlayers] = useState<string[]>(['']);
-  const [numTeams, setNumTeams] = useState(2);
+  const [numTeams, setNumTeams] = useState<number | ''>('');
 
   const addPlayer = () => setPlayers([...players, '']);
   const removePlayer = (i: number) => setPlayers(players.filter((_, idx) => idx !== i));
@@ -20,7 +20,8 @@ export default function PlayerInput({ onSubmit }: Props) {
   };
 
   const validPlayers = players.filter(p => p.trim());
-  const canSubmit = validPlayers.length >= numTeams * 2 && numTeams >= 2;
+  const teamsNum = typeof numTeams === 'number' ? numTeams : 0;
+  const canSubmit = validPlayers.length >= teamsNum * 2 && teamsNum >= 2;
 
   return (
     <div className="gradient-card rounded-xl border border-border p-6 shadow-card space-y-6">
@@ -61,20 +62,23 @@ export default function PlayerInput({ onSubmit }: Props) {
           min={2}
           max={Math.floor(validPlayers.length / 2) || 2}
           value={numTeams}
-          onChange={e => setNumTeams(parseInt(e.target.value) || 2)}
+          onChange={e => {
+            const val = e.target.value;
+            setNumTeams(val === '' ? '' : (parseInt(val) || ''));
+          }}
           className="bg-muted border-border text-foreground w-24"
         />
       </div>
 
       <Button
-        onClick={() => onSubmit(validPlayers, numTeams)}
+        onClick={() => onSubmit(validPlayers, teamsNum)}
         disabled={!canSubmit}
         className="w-full gradient-primary text-primary-foreground font-display text-lg tracking-wider hover:opacity-90 disabled:opacity-40 h-12"
       >
         <Shuffle className="w-5 h-5 mr-2" /> Generate Teams
       </Button>
       {!canSubmit && validPlayers.length > 0 && (
-        <p className="text-xs text-muted-foreground text-center">Need at least {numTeams * 2} players for {numTeams} teams</p>
+        <p className="text-xs text-muted-foreground text-center">Need at least {teamsNum * 2} players for {teamsNum} teams</p>
       )}
     </div>
   );
